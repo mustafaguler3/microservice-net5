@@ -10,10 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Mvc.Authorization;
+using FreeCourse.Services.Basket.Settings;
 
-namespace FreeCourse.Services.PhotoStock
+namespace FreeCourse.Services.Basket
 {
     public class Startup
     {
@@ -27,23 +26,12 @@ namespace FreeCourse.Services.PhotoStock
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    //token daðýtmaktan sorumlu
-                    options.Authority = Configuration["IdentityServerURL"];
-                    options.Audience = "resource_catalog";
-                    options.RequireHttpsMetadata = false;
-                });
+            services.Configure<RedisSettings>(Configuration.GetSection("RedisSettings"));
 
-            services.AddControllers(i =>
-            {
-                i.Filters.Add(new AuthorizeFilter());//tüm controllerde iþlenmiþ olacak
-            });
-
+            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "FreeCourse.Services.PhotoStock", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "FreeCourse.Services.Basket", Version = "v1" });
             });
         }
 
@@ -54,13 +42,11 @@ namespace FreeCourse.Services.PhotoStock
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FreeCourse.Services.PhotoStock v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FreeCourse.Services.Basket v1"));
             }
 
             app.UseRouting();
 
-            app.UseStaticFiles();
-            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
