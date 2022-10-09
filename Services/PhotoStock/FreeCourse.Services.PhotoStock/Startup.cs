@@ -32,7 +32,7 @@ namespace FreeCourse.Services.PhotoStock
                 {
                     //token daðýtmaktan sorumlu
                     options.Authority = Configuration["IdentityServerURL"];
-                    options.Audience = "resource_catalog";
+                    options.Audience = "resource_photo_stock";
                     options.RequireHttpsMetadata = false;
                 });
 

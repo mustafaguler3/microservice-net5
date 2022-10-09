@@ -30,6 +30,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basket", "Basket", "{BBE3C4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Services.Basket", "Services\Basket\FreeCourse.Services.Basket\FreeCourse.Services.Basket.csproj", "{2812F598-5E4A-4310-A3CC-57651223581A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discount", "Discount", "{6461C21E-2C10-40D4-A407-4E8172F15F5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Services.Discount", "Services\Discount\FreeCourse.Services.Discount\FreeCourse.Services.Discount.csproj", "{E495D564-2747-433D-AC97-2BEE3441E4D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +60,10 @@ Global
 		{2812F598-5E4A-4310-A3CC-57651223581A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2812F598-5E4A-4310-A3CC-57651223581A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2812F598-5E4A-4310-A3CC-57651223581A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E495D564-2747-433D-AC97-2BEE3441E4D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E495D564-2747-433D-AC97-2BEE3441E4D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E495D564-2747-433D-AC97-2BEE3441E4D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E495D564-2747-433D-AC97-2BEE3441E4D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +77,8 @@ Global
 		{1A3E7ED8-CB9B-4367-A685-262E07119395} = {2AFC0D68-5AE0-44B6-9317-504069E9C9B9}
 		{BBE3C4AA-EC13-488D-9D9C-D92897AA1CCE} = {8A99490A-8B47-4D09-98D6-8EC35208D7F4}
 		{2812F598-5E4A-4310-A3CC-57651223581A} = {BBE3C4AA-EC13-488D-9D9C-D92897AA1CCE}
+		{6461C21E-2C10-40D4-A407-4E8172F15F5B} = {8A99490A-8B47-4D09-98D6-8EC35208D7F4}
+		{E495D564-2747-433D-AC97-2BEE3441E4D8} = {6461C21E-2C10-40D4-A407-4E8172F15F5B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {44C94126-3813-4159-94F5-BFB084BA98D6}
