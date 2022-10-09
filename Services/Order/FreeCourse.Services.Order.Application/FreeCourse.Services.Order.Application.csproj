@@ -9,7 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FreeCourse.Services.Order.Domain.Core\FreeCourse.Services.Order.Domain.Core.csproj" />
     <ProjectReference Include="..\FreeCourse.Services.Order.Domain\FreeCourse.Services.Order.Domain.csproj" />
+    <ProjectReference Include="..\FreeCourse.Services.Order.Instrastructure\FreeCourse.Services.Order.Instrastructure.csproj" />
   </ItemGroup>
 
 </Project>

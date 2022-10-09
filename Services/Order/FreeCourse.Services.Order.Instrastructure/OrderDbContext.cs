@@ -21,6 +21,7 @@ namespace FreeCourse.Services.Order.Instrastructure
         public DbSet<OrderItem> OrderItems { get; set; }
         //address bizim için owned olaracğı için db de karşılığı olmayacak
 
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Domain.OrderAggregate.Order>().ToTable("Orders", DEFAULT_SCHEMA);
