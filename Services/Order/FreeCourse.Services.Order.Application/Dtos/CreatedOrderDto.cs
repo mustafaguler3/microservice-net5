@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace FreeCourse.Services.Order.Application.Dtos
 {
-    internal class CreatedOrderDto
+    public class CreatedOrderDto
     {
+        public int OrderId { get; set; }
     }
 }
