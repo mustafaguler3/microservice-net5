@@ -44,7 +44,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Services.Order.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Services.Order.Domain.Core", "Services\Order\FreeCourse.Services.Order.Domain.Core\FreeCourse.Services.Order.Domain.Core.csproj", "{00A9318A-1FC7-4DA8-902D-67108B620441}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Services.Order.Instrastructure", "Services\Order\FreeCourse.Services.Order.Instrastructure\FreeCourse.Services.Order.Instrastructure.csproj", "{B7076AB6-F97C-49E9-ACCD-47BEFCF0BC9E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Services.Order.Infrastructure", "Services\Order\FreeCourse.Services.Order.Instrastructure\FreeCourse.Services.Order.Infrastructure.csproj", "{B7076AB6-F97C-49E9-ACCD-47BEFCF0BC9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

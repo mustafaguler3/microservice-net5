@@ -13,7 +13,7 @@ using MediatR;
 
 namespace FreeCourse.Services.Order.Application.Handlers
 {
-    public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, CreatedOrderDto>
+    public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Response<CreatedOrderDto>>
     {
         private readonly OrderDbContext _context;
 
@@ -22,9 +22,22 @@ namespace FreeCourse.Services.Order.Application.Handlers
             _context = context;
         }
 
-        public Task<CreatedOrderDto> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+        public async Task<Response<CreatedOrderDto>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            var newAddress = new Address(request.AddressDto.Province,request.AddressDto.District,request.AddressDto.Street,request.AddressDto.ZipCode);
+            var newAddress = new Address(request.AddressDto.Province,request.AddressDto.District,request.AddressDto.Street,request.AddressDto.ZipCode,request.AddressDto.Line);
+
+            Domain.OrderAggregate.Order order = new Domain.OrderAggregate.Order(request.BuyerId, newAddress);
+
+            request.OrderItems.ForEach(i =>
+            {
+                order.AddOrderItem(i.ProductId,i.ProductName,i.Price,i.PictureUrl);
+            });
+
+            await _context.Orders.AddAsync(order);
+
+            await _context.SaveChangesAsync();
+
+            return Response<CreatedOrderDto>.Success(new CreatedOrderDto{OrderId = order.Id},200);
         }
     }
 }

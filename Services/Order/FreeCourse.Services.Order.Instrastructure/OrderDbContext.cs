@@ -19,14 +19,12 @@ namespace FreeCourse.Services.Order.Instrastructure
 
         public DbSet<Domain.OrderAggregate.Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
-        //address bizim için owned olaracğı için db de karşılığı olmayacak
 
-        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Domain.OrderAggregate.Order>().ToTable("Orders", DEFAULT_SCHEMA);
 
-            modelBuilder.Entity<OrderItem>().ToTable("Orders", DEFAULT_SCHEMA);
+            modelBuilder.Entity<OrderItem>().ToTable("OrderItems", DEFAULT_SCHEMA);
 
             modelBuilder.Entity<OrderItem>().Property(i => i.Price).HasColumnType("decimal(18,2)");
 
