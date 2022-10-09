@@ -34,6 +34,7 @@ namespace FreeCourse.Services.Discount.Controllers
             return CreateActionResultInstance(discount);
         }
 
+        [HttpGet]
         [Route("/api/[controller]/[action]/{code}")]
         public async Task<IActionResult> GetByCode(string code)
         {
@@ -41,6 +42,24 @@ namespace FreeCourse.Services.Discount.Controllers
             var discount = await _discountService.GetByCodeAndUserId(code,userId);
 
             return CreateActionResultInstance(discount);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Save(Models.Discount discount)
+        {
+            return CreateActionResultInstance(await _discountService.Save(discount));
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(Models.Discount discount)
+        {
+            return CreateActionResultInstance(await _discountService.Update(discount));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Save(int id)
+        {
+            return CreateActionResultInstance(await _discountService.Delete(id));
         }
     }
 }
