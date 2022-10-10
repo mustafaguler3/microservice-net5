@@ -26,8 +26,19 @@ namespace FreeCourse.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<ServiceApiSettings>(Configuration.GetSection("ServiceApiSettings"));
+
+            services.Configure<ClientSettings>(Configuration.GetSection("ClientSettings"));
+
+            var serviceApiSettings = Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
+
             services.AddHttpContextAccessor();
             services.AddHttpClient<IIdentityService, IdentityService>();
+
+            services.AddHttpClient<IUserService, UserService>(opt =>
+            {
+                opt.BaseAddress = new Uri(serviceApiSettings.IdentityBaseUrl);
+            });
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
                 CookieAuthenticationDefaults.AuthenticationScheme,
@@ -39,9 +50,7 @@ namespace FreeCourse.Web
                     opt.Cookie.Name = "udemywebcookie";
                 });
 
-            services.Configure<ServiceApiSettings>(Configuration.GetSection("ServiceApiSettings"));
             
-            services.Configure<ClientSettings>(Configuration.GetSection("ClientSettings"));
 
             services.AddControllersWithViews();
         }
