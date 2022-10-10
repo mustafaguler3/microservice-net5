@@ -4,4 +4,5 @@ Services
 -basket api => http://localhost:5013
 -discount api => http://localhost:5014
 -order api => http://localhost:5015
+-fakePayment api => http://localhost:5016
 -identityserver api => http://localhost:5001
