@@ -56,6 +56,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Gateway", "FreeC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontends", "Frontends", "{BA746380-550D-42A3-9449-449463B80BD8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Web", "FreeCourse.Web\FreeCourse.Web.csproj", "{D79B7888-B644-479C-A61C-B6AAC8924FF9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,6 +116,10 @@ Global
 		{2958DEE3-F833-45C6-90A4-04564FD0F383}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2958DEE3-F833-45C6-90A4-04564FD0F383}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2958DEE3-F833-45C6-90A4-04564FD0F383}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D79B7888-B644-479C-A61C-B6AAC8924FF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D79B7888-B644-479C-A61C-B6AAC8924FF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D79B7888-B644-479C-A61C-B6AAC8924FF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D79B7888-B644-479C-A61C-B6AAC8924FF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,6 +144,7 @@ Global
 		{4166659E-9DAC-4720-8138-A82686B2583D} = {8A99490A-8B47-4D09-98D6-8EC35208D7F4}
 		{5B96D706-EFCC-4C64-B3CB-0B5E68858342} = {4166659E-9DAC-4720-8138-A82686B2583D}
 		{2958DEE3-F833-45C6-90A4-04564FD0F383} = {08232C6D-A18D-481D-B218-4724176CE711}
+		{D79B7888-B644-479C-A61C-B6AAC8924FF9} = {BA746380-550D-42A3-9449-449463B80BD8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {44C94126-3813-4159-94F5-BFB084BA98D6}
