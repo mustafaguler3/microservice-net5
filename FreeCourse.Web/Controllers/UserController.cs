@@ -20,5 +20,7 @@ namespace FreeCourse.Web.Controllers
         {
             return View(await _userService.GetUser());
         }
+
+
     }
 }

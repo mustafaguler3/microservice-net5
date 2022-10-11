@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FreeCourse.Shared.Services;
 using FreeCourse.Web.Handler;
 using FreeCourse.Web.Models;
 using FreeCourse.Web.Services;
@@ -27,13 +28,22 @@ namespace FreeCourse.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var serviceApiSettings = Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
+
+            services.AddHttpClient<ICatalogService, CatalogService>(i =>
+            {
+                i.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Catalog.Path}");
+            });
+
+            services.AddScoped<ISharedIdentityService, SharedIdentityService>();
+
             services.AddScoped<ResourceOwnerPasswordTokenHandler>();
 
             services.Configure<ServiceApiSettings>(Configuration.GetSection("ServiceApiSettings"));
 
             services.Configure<ClientSettings>(Configuration.GetSection("ClientSettings"));
 
-            var serviceApiSettings = Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
+            
 
             services.AddHttpContextAccessor();
             services.AddHttpClient<IIdentityService, IdentityService>();

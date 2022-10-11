@@ -26,7 +26,17 @@
                     
                     @if (User.Identity.IsAuthenticated)
                     {
-
+                        <ul class="navbar-nav"> 
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @User.Identity.Name
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-controller="User" asp-action="Index">Profile</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Auth" asp-action="Logout">Sign Out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     }
                     else
                     {
