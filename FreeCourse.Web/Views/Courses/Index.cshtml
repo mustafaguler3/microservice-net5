@@ -1,4 +1,4 @@
-﻿@model CourseViewModel
+﻿@model List<CourseViewModel>
 
 <div class="row">
     <div class="col-md-12">
@@ -6,13 +6,35 @@
             <div class="card-body">
                 <h5 class="card-title">Courses</h5>
                 
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
+                @if (Model.Any())
+                {
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
                             <th>Image</th>
-                    </tr>
-                    </thead>
-                </table>
+                            <th>Course Name</th>
+                            <th>Price</th>
+                            <th>Duration</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Price</td>
+                                <td>@item.Feature.Duration</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="alert alert-danger">
+                        registered course not found
+                    </div>
+                }
             </div>
         </div>
 
