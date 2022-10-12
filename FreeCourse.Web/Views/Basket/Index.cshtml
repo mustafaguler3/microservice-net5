@@ -25,12 +25,25 @@
                                 </td>
                             </tr>
                         }
+                        @if (Model.HasDiscount)
+                        {
+                            <tr>
+                                <td>Discount rate</td>
+                                <td colspan="2">%@Model.DiscountRate.Value</td>
+                            </tr>
+                        }
+
+                        <tr>
+                            <td>@(Model.HasDiscount ? "Discounted Rate": "Total Price")</td>
+                            <th colspan="2">@Model.TotalPrice TL</th>
+                        </tr>
                     </table>
                 }
                 else
                 {
                     <div class="alert alert-info">Basket empty</div>
                 }
+
             </div>
         </div>
     </div>
