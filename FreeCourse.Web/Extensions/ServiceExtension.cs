@@ -18,6 +18,15 @@ namespace FreeCourse.Web.Extensions
         {
             var serviceApiSettings = Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
 
+            services.AddHttpClient<IOrderService, OrderService>(i =>
+            {
+                i.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Order.Path}");
+            }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+            services.AddHttpClient<IPaymentService, PaymentService>(i =>
+            {
+                i.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Payment.Path}");
+            }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
             services.AddHttpClient<IPhotoStockService, PhotoStockService>();
             services.AddHttpClient<ICatalogService, CatalogService>(i =>
