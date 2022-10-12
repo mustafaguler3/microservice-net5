@@ -8,7 +8,7 @@ namespace FreeCourse.Web.Services.Interfaces
     {
         Task<OrderCreateViewModel> CreateOrder(CheckoutInfoInput checkoutInfoInput);
         
-        Task SuspendOrder(CheckoutInfoInput checkoutInfoInput);
+        Task<OrderSuspendViewModel> SuspendOrder(CheckoutInfoInput checkoutInfoInput);
 
         Task<List<OrderViewModel>> GetOrder();
     }

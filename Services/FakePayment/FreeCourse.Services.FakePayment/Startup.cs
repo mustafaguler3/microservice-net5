@@ -42,6 +42,7 @@ namespace FreeCourse.Services.FakePayment
                     });
                 });
             });
+            services.AddMassTransitHostedService();
 
             var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
 

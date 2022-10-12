@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FreeCourse.Shared.Messages;
 
 namespace FreeCourse.Services.FakePayment.Models
 {
@@ -7,17 +8,17 @@ namespace FreeCourse.Services.FakePayment.Models
     {
         public OrderDto()
         {
-            OrderItems = new List<OrderItem>();
+            OrderItems = new List<OrderIteM>();
         }
 
         public string BuyerId { get; set; }
 
-        public List<OrderItem> OrderItems { get; set; }
+        public List<OrderIteM> OrderItems { get; set; }
 
         public AddressDto Address { get; set; }
     }
 
-    public class OrderItem
+    public class OrderIteM
     {
         public string ProductId { get; set; }
         public string ProductName { get; set; }

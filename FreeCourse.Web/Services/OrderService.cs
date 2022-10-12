@@ -84,9 +84,58 @@ namespace FreeCourse.Web.Services
             return orderCreated;
         }
 
-        public Task SuspendOrder(CheckoutInfoInput checkoutInfoInput)
+        public async Task<OrderSuspendViewModel> SuspendOrder(CheckoutInfoInput checkoutInfoInput)
         {
-            throw new System.NotImplementedException();
+            var basket = await _basketService.Get();
+
+            var orderCreate = new OrderCreateInput()
+            {
+                BuyerId = _sharedIdentityService.GetUserId,
+                Address = new AddressCreateInput()
+                {
+                    Province = checkoutInfoInput.Province,
+                    District = checkoutInfoInput.District,
+                    Line = checkoutInfoInput.Line,
+                    Street = checkoutInfoInput.Street,
+                    ZipCode = checkoutInfoInput.ZipCode
+                },
+
+            };
+
+            basket.BasketItems.ForEach(i =>
+            {
+                var orderItem = new OrderItemCreateInput
+                {
+                    ProductId = i.CourseId,
+                    ProductName = i.CourseName,
+                    Price = i.Price,
+                    PictureUrl = ""
+                };
+
+                orderCreate.OrderItems.Add(orderItem);
+            });
+
+            
+
+            var payment = new PaymentInfoInput()
+            {
+                CardName = checkoutInfoInput.CardName,
+                CardNumber = checkoutInfoInput.CardNumber,
+                Expiration = checkoutInfoInput.Expiration,
+                CVV = checkoutInfoInput.CVV,
+                TotalPrice = basket.TotalPrice
+            };
+
+            var response = await _paymentService.ReceivePayment(payment);
+
+            if (!response)
+            {
+                return new OrderSuspendViewModel() { Error = "Ödeme alınmadı", IsSuccessfull = false };
+            }
+
+            await _basketService.Delete();
+
+            return new OrderSuspendViewModel() { IsSuccessfull = true };
         }
 
         public async Task<List<OrderViewModel>> GetOrder()
