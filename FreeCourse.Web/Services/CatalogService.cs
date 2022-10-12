@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using FreeCourse.Shared.Dtos;
+using FreeCourse.Web.Helpers;
 using FreeCourse.Web.Models;
 using FreeCourse.Web.Services.Interfaces;
 
@@ -12,10 +13,14 @@ namespace FreeCourse.Web.Services
     {
         //delege yazıp bizim yerimize token oluşturacak
         private readonly HttpClient _httpClient;
+        private readonly IPhotoStockService _photoStockService;
+        private readonly PhotoHelper _photoHelper;
 
-        public CatalogService(HttpClient httpClient)
+        public CatalogService(HttpClient httpClient, IPhotoStockService photoStockService, PhotoHelper photoHelper)
         {
             _httpClient = httpClient;
+            _photoStockService = photoStockService;
+            _photoHelper = photoHelper;
         }
 
         public async Task<List<CourseViewModel>> GetAllCourseAsync()
@@ -28,6 +33,11 @@ namespace FreeCourse.Web.Services
             }
 
             var data = await response.Content.ReadFromJsonAsync<Response<List<CourseViewModel>>>();
+
+            data.Data.ForEach(i =>
+            {
+                i.Picture = _photoHelper.GetPhotoStockUrl(i.Picture);
+            });
 
             return data.Data;
         }
@@ -57,6 +67,11 @@ namespace FreeCourse.Web.Services
 
             var data = await response.Content.ReadFromJsonAsync<Response<List<CourseViewModel>>>();
 
+            data.Data.ForEach(i =>
+            {
+                i.Picture = _photoHelper.GetPhotoStockUrl(i.Picture);
+            });
+
             return data.Data;
         }
 
@@ -83,6 +98,13 @@ namespace FreeCourse.Web.Services
 
         public async Task<bool> CreateCourseAsync(CourseCreateInput courseCreate)
         {
+            var resultPhoto = await _photoStockService.Upload(courseCreate.PhotoFormFile);
+            
+            if (resultPhoto != null)
+            {
+                courseCreate.Picture = resultPhoto.Url;
+            }
+
             var response = await _httpClient.PostAsJsonAsync<CourseCreateInput>("courses",courseCreate);
 
             return response.IsSuccessStatusCode;

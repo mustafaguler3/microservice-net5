@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http;
 
 namespace FreeCourse.Web.Models
 {
@@ -11,5 +12,7 @@ namespace FreeCourse.Web.Models
         public string UserId { get; set; }
         public FeatureViewModel Feature { get; set; }
         public string CategoryId { get; set; }
+
+        public IFormFile PhotoFormFile { get; set; }
     }
 }

@@ -8,7 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FreeCourse.Shared.Services;
+using FreeCourse.Web.Extensions;
 using FreeCourse.Web.Handler;
+using FreeCourse.Web.Helpers;
 using FreeCourse.Web.Models;
 using FreeCourse.Web.Services;
 using FreeCourse.Web.Services.Interfaces;
@@ -28,50 +30,7 @@ namespace FreeCourse.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var serviceApiSettings = Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
-
-            services.AddScoped<ResourceOwnerPasswordTokenHandler>();
-
-            services.AddScoped<ClientCredentialTokenHandler>();
-
-            services.AddAccessTokenManagement();
-
-            services.AddHttpClient<ICatalogService, CatalogService>(i =>
-            {
-                i.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Catalog.Path}");
-            }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
-
-            services.AddScoped<ISharedIdentityService, SharedIdentityService>();
-
-            services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
-
-            
-
-            services.Configure<ServiceApiSettings>(Configuration.GetSection("ServiceApiSettings"));
-
-            services.Configure<ClientSettings>(Configuration.GetSection("ClientSettings"));
-
-            
-
-            services.AddHttpContextAccessor();
-            services.AddHttpClient<IIdentityService, IdentityService>();
-
-            services.AddHttpClient<IUserService, UserService>(opt =>
-            {
-                opt.BaseAddress = new Uri(serviceApiSettings.IdentityBaseUrl);
-            }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
-
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                opt =>
-                {
-                    opt.LoginPath = "Auth/SignIn";
-                    opt.ExpireTimeSpan = TimeSpan.FromDays(60);
-                    opt.SlidingExpiration = true;
-                    opt.Cookie.Name = "udemywebcookie";
-                });
-
-            
+            services.AddHttpClientServices(Configuration);
 
             services.AddControllersWithViews();
         }
